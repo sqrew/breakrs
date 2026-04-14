@@ -189,6 +189,9 @@ pub fn run_daemon() -> Result<(), Box<dyn std::error::Error>> {
             let notification = {
                 let mut n = Notification::new();
                 n.summary(&timer.message).body("Break timer completed");
+                if timer.sound {
+                    n.sound_name("Glass");
+                }
                 // Note: Sound support on macOS may vary by notification backend
                 // The --sound flag is accepted but may not always produce audio
                 n.finalize()
